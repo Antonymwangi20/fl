@@ -1,0 +1,45 @@
+[build-system]
+# Use setuptools as the build backend
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Project metadata
+name = "py-tool"
+version = "1.0.0"
+description = "Python project management without the friction"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Antony Mwangi", email = "antony254mm@gmail.com"},
+]
+keywords = ["python", "project", "management", "venv", "dependencies", "packaging"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: System :: Software Distribution",
+    "Topic :: Utilities",
+]
+
+[project.urls]
+Homepage = "https://github.com/Antonymwangi20/py"
+Documentation = "https://github.com/Antonymwangi20/py#readme"
+Source = "https://github.com/Antonymwangi20/py"
+Tracker = "https://github.com/Antonymwangi20/py/issues"
+
+[project.scripts]
+py = "py:main"
+
+[tool.setuptools]
+py-modules = ["py"]
