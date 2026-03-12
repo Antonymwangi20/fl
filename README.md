@@ -617,22 +617,3 @@ $ py cache info
 MIT 
 
 ---
-
-## Changelog
-
-### v2.0 (Phase 2) - March 2026
-- ✨ Global wheel cache (`~/.cache/py/`)
-- ✨ Dependency conflict checking (`py check`)
-- ✨ Auto-fix broken projects (`py fix`)
-- ✨ Environment snapshots for CI (`py snapshot`)
-- 🔧 Enhanced `py doctor` with TOML/Python version validation
-- 🔧 Modern `py search` using PyPI JSON API
-- 🔧 Lock file improvements
-
-### v1.0 (Phase 1) - March 2026
-- ✨ Virtual environment management
-- ✨ Dependency installation & upgrades
-- ✨ Direct script execution
-- ✨ Lock files for reproducibility
-- ✨ `py doctor` diagnostics
-- ✨ PyPI search (deprecated: pip search)
