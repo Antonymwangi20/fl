@@ -1,6 +1,6 @@
 # Command Reference
 
-Quick lookup for all `py` commands with examples and options.
+Quick lookup for all `fl-tool` commands with examples and options.
 
 ---
 
@@ -29,13 +29,13 @@ Quick lookup for all `py` commands with examples and options.
 
 ## Core Commands
 
-### `py init`
+### `fl init`
 
 **Purpose:** Initialize a new project
 
 **Usage:**
 ```bash
-py init
+fl init
 ```
 
 **Output:**
@@ -50,26 +50,26 @@ py init
 - `pyproject.toml` – Project metadata
 - `.gitignore` – Venv exclusions
 - `.venv/` – Virtual environment
-- `.py.state.json` – Empty deps list
-- `.py.lock.json` – Empty lock
+- `.fl.state.json` – Empty deps list
+- `.fl.lock.json` – Empty lock
 
 **Options:** None
 
 **Notes:**
 - Safe to run multiple times (won't overwrite existing)
-- Must run before `py add`
+- Must run before `fl add`
 
 ---
 
-### `py add <package> [package2 ...]`
+### `fl add <package> [package2 ...]`
 
 **Purpose:** Add dependencies and install them
 
 **Usage:**
 ```bash
-py add requests
-py add flask django
-py add "numpy>=1.20,<2.0"
+fl add requests
+fl add flask django
+fl add "numpy>=1.20,<2.0"
 ```
 
 **Output:**
@@ -84,9 +84,9 @@ py add "numpy>=1.20,<2.0"
 **What it does:**
 1. Parses package specs
 2. Checks for conflicts
-3. Adds to `.py.state.json`
+3. Adds to `.fl.state.json`
 4. Installs via pip
-5. Saves lock file (`.py.lock.json`)
+5. Saves lock file (`.fl.lock.json`)
 
 **Options:**
 - None (positional args are packages)
@@ -98,14 +98,14 @@ py add "numpy>=1.20,<2.0"
 
 ---
 
-### `py remove <package> [package2 ...]`
+### `fl remove <package> [package2 ...]`
 
 **Purpose:** Remove dependencies and uninstall
 
 **Usage:**
 ```bash
-py remove requests
-py remove flask django
+fl remove requests
+fl remove flask django
 ```
 
 **Output:**
@@ -121,15 +121,15 @@ Successfully uninstalled requests-2.32.5
 
 ---
 
-### `py upgrade [package]`
+### `fl upgrade [package]`
 
 **Purpose:** Upgrade packages to latest versions
 
 **Usage:**
 ```bash
-py upgrade                # Upgrade all
-py upgrade requests       # Upgrade specific package
-py upgrade flask django   # Upgrade multiple
+fl upgrade                # Upgrade all
+fl upgrade requests       # Upgrade specific package
+fl upgrade flask django   # Upgrade multiple
 ```
 
 **Output (all up to date):**
@@ -149,19 +149,19 @@ Successfully installed requests-2.32.5
 
 ---
 
-### `py run <script.py> [args...]` / `py <script.py> [args...]`
+### `fl run <script.py> [args...]` / `fl <script.py> [args...]`
 
 **Purpose:** Execute a Python script in project environment
 
 **Usage:**
 ```bash
 # Full syntax
-py run main.py
-py run main.py --port 8000 --debug
+fl run main.py
+fl run main.py --port 8000 --debug
 
 # Shorthand (no 'run' verb)
-py main.py
-py main.py --port 8000
+fl main.py
+fl main.py --port 8000
 ```
 
 **Output:**
@@ -186,13 +186,13 @@ Starting server on port 8000...
 
 ---
 
-### `py shell`
+### `fl shell`
 
 **Purpose:** Enter interactive shell with project environment activated
 
 **Usage:**
 ```bash
-py shell
+fl shell
 ```
 
 **Output:**
@@ -228,13 +228,13 @@ $
 
 ---
 
-### `py list`
+### `fl list`
 
 **Purpose:** Show project dependencies and installed packages
 
 **Usage:**
 ```bash
-py list
+fl list
 ```
 
 **Output:**
@@ -261,13 +261,13 @@ Lock records 13 packages
 
 ---
 
-### `py purge`
+### `fl purge`
 
 **Purpose:** Completely clear project environment and dependencies
 
 **Usage:**
 ```bash
-py purge
+fl purge
 ```
 
 **Output:**
@@ -283,13 +283,13 @@ py purge
 
 ## Diagnostic Commands
 
-### `py doctor`
+### `fl doctor`
 
 **Purpose:** Run comprehensive project diagnostics
 
 **Usage:**
 ```bash
-py doctor
+fl doctor
 ```
 
 **Healthy output:**
@@ -332,13 +332,13 @@ Examining project...
 
 ---
 
-### `py check`
+### `fl check`
 
 **Purpose:** Check for dependency conflicts and invalid specs
 
 **Usage:**
 ```bash
-py check
+fl check
 ```
 
 **Healthy output:**
@@ -369,13 +369,13 @@ Analyzing dependencies...
 
 ---
 
-### `py audit`
+### `fl audit`
 
 **Purpose:** Check for available package updates on PyPI
 
 **Usage:**
 ```bash
-py audit
+fl audit
 ```
 
 **All up to date:**
@@ -403,14 +403,14 @@ Run 'py upgrade requests' to update a package
 
 ---
 
-### `py search <term>`
+### `fl search <term>`
 
 **Purpose:** Search PyPI for packages
 
 **Usage:**
 ```bash
-py search flask
-py search web framework
+pfly search flask
+fl search web framework
 ```
 
 **Output:**
@@ -439,13 +439,13 @@ Results (top 5):
 
 ---
 
-### `py lock-diff`
+### `fl lock-diff`
 
 **Purpose:** Compare lock file against currently installed packages
 
 **Usage:**
 ```bash
-py lock-diff
+fl lock-diff
 ```
 
 **In sync:**
@@ -471,36 +471,36 @@ Version mismatches (1):
     lock:      2.30.0
     installed: 2.32.5
 
-Run 'py add ...' to add packages to dependencies
-Run 'py install --force' to sync to dependencies
+Run 'fl add ...' to add packages to dependencies
+Run 'fl install --force' to sync to dependencies
 ```
 
 ---
 
 ## Phase 2 Commands
 
-### `py cache`
+### `fl cache`
 
 **Purpose:** Manage global wheel cache at `~/.cache/py`
 
-#### `py cache info`
+#### `fl cache info`
 
 Show cache status:
 
 ```bash
-$ py cache info
+$ fl cache info
 
 Cache directory: /home/user/.cache/py
 Wheels cached: 42
 Total size: 156.32 MB
 ```
 
-#### `py cache prune`
+#### `fl cache prune`
 
 Remove wheels older than 30 days:
 
 ```bash
-$ py cache prune
+$ fl cache prune
 
 Searching for old wheels (>30 days)...
 ✓ Pruned 5 old wheels
@@ -513,19 +513,19 @@ Total remaining: 132.87 MB
 
 ---
 
-### `py check`
+### `fl check`
 
 Check for dependency conflicts (see [diagnostic commands](#py-check) above)
 
 ---
 
-### `py fix`
+### `fl fix`
 
 **Purpose:** Auto-repair common project issues
 
 **Usage:**
 ```bash
-py fix
+fl fix
 ```
 
 **Output:**
@@ -549,27 +549,27 @@ Scanning for issues...
 
 ---
 
-### `py snapshot`
+### `fl snapshot`
 
 **Purpose:** Save and compare environment snapshots for CI reproducibility
 
-#### `py snapshot save [name]`
+#### `fl snapshot save [name]`
 
 Save current environment state:
 
 ```bash
-$ py snapshot save production
-✓ Snapshot saved: .py-snapshots/production.json
+$ fl snapshot save production
+✓ Snapshot saved: .fl-snapshots/production.json
 
-$ py snapshot save latest
-✓ Snapshot saved: .py-snapshots/latest.json
+$ fl snapshot save latest
+✓ Snapshot saved: .fl-snapshots/latest.json
 ```
 
 **Without name:** Uses current timestamp
 
 ```bash
-$ py snapshot save
-✓ Snapshot saved: .py-snapshots/2026-03-15T14-23-45.json
+$ fl snapshot save
+✓ Snapshot saved: .fl-snapshots/2026-03-15T14-23-45.json
 ```
 
 **Snapshot contents:**
@@ -586,12 +586,12 @@ $ py snapshot save
 }
 ```
 
-#### `py snapshot compare [name]`
+#### `fl snapshot compare [name]`
 
 Compare current environment against snapshot:
 
 ```bash
-$ py snapshot compare production
+$ fl snapshot compare production
 
 Comparing against snapshot 'production'...
 ```
@@ -615,12 +615,12 @@ Updated (2):
   flask        locked: 3.0.0   installed: 3.1.3
 ```
 
-#### `py snapshot list`
+#### `fl snapshot list`
 
 List all saved snapshots:
 
 ```bash
-$ py snapshot list
+$ fl snapshot list
 
 Saved snapshots in .py-snapshots/:
   • production (2026-03-15T14:23:45)
@@ -633,10 +633,10 @@ Saved snapshots in .py-snapshots/:
 ## Global Help
 
 ```bash
-py --help
-py -h
+fl --help
+fl -h
 
-usage: py [-h] {init,add,run,shell,list,remove,upgrade,doctor,purge,search,audit,lock-diff,cache,check,fix,snapshot} ...
+usage: fl [-h] {init,add,run,shell,list,remove,upgrade,doctor,purge,search,audit,lock-diff,cache,check,fix,snapshot} ...
 
 Python Project Management
 
@@ -664,10 +664,10 @@ optional arguments:
 ```
 
 ```bash
-py <command> --help
-py add --help
+fl <command> --help
+fl add --help
 
-usage: py add [-h] package [package ...]
+usage: fl add [-h] package [package ...]
 
 positional arguments:
   package     Package(s) to add (e.g., requests, flask>=3.0)
@@ -683,42 +683,42 @@ optional arguments:
 ### Starting a new web project:
 
 ```bash
-py init                                    # Initialize
-py add flask flask-cors                    # Add dependencies
-py run web_server.py --port 8000          # Run server
+fl init                                    # Initialize
+fl add flask flask-cors                    # Add dependencies
+fl run web_server.py --port 8000          # Run server
 ```
 
 ### Checking project health:
 
 ```bash
-py doctor
-py check
-py audit
+fl doctor
+fl check
+fl audit
 ```
 
 ### CI/CD workflow:
 
 ```bash
-py snapshot save ci-baseline               # Save known-good state
+fl snapshot save ci-baseline               # Save known-good state
 # (run tests, skip errors)
-py snapshot compare ci-baseline            # Verify reproducibility
+fl snapshot compare ci-baseline            # Verify reproducibility
 ```
 
 ### Updating dependencies:
 
 ```bash
-py audit                                   # See what's outdated
-py upgrade requests flask                  # Upgrade specific packages
-py check                                   # Verify no conflicts
-py snapshot save upgraded-deps             # Archive new state
+fl audit                                   # See what's outdated
+fl upgrade requests flask                  # Upgrade specific packages
+fl check                                   # Verify no conflicts
+fl snapshot save upgraded-deps             # Archive new state
 ```
 
 ### Recovering from corruption:
 
 ```bash
-py doctor                                  # Identify issues
-py fix                                     # Auto-repair
-py run tests.py                            # Verify it works
+fl doctor                                  # Identify issues
+fl fix                                     # Auto-repair
+fl run tests.py                            # Verify it works
 ```
 
 ---
@@ -738,29 +738,29 @@ py run tests.py                            # Verify it works
 
 1. **Use `-v` for debugging:**
    ```bash
-   py run main.py -v
+   fl run main.py -v
    ```
 
 2. **Check state quickly:**
    ```bash
-   cat .py.state.json | python3 -m json.tool
-   cat .py.lock.json | python3 -m json.tool
+   cat .fl.state.json | python3 -m json.tool
+   cat .fl.lock.json | python3 -m json.tool
    ```
 
 3. **Save before big changes:**
    ```bash
-   py snapshot save backup
-   py add many-packages
+   fl snapshot save backup
+   fl add many-packages
    # If issues: restore manually or use snapshot metadata
    ```
 
 4. **Audit regularly:**
    ```bash
-   py audit  # Check for security updates weekly
+   fl audit  # Check for security updates weekly
    ```
 
 5. **Use snapshots in CI:**
    ```yaml
    - name: Verify environment stability
-     run: py snapshot compare ci-baseline
+     run: fl snapshot compare ci-baseline
    ```

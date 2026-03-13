@@ -19,7 +19,7 @@ else:
 
 setup(
     name='fl-tool',
-    version='1.0.0',
+    version='1.0.1',
     description='Python project management without the friction',
     long_description=long_description,
     long_description_content_type='text/markdown',
