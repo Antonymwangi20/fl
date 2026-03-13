@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 # Project metadata
 name = "fl-tool"
-version = "1.0.0"
+version = "1.0.1"
 description = "Python project management without the friction"
 readme = "README.md"
 requires-python = ">=3.8"

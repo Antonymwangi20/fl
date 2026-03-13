@@ -15,6 +15,9 @@ fl init
 # Add dependencies
 fl add requests flask
 
+# Add from requirements.txt
+fl add req
+
 # Run a script
 fl main.py
 
@@ -71,6 +74,13 @@ $ fl add requests flask
 ✓ Added requests
 ✓ Added flask
 ✓ Virtual environment created
+✓ Dependencies installed
+```
+
+**Add from requirements.txt:**
+```bash
+$ fl add req
+✓ Added 5 packages from requirements.txt
 ✓ Dependencies installed
 ```
 
@@ -597,6 +607,9 @@ A: Use `pip`'s standard authentication. fl passes everything to pip.
 
 **Q: Does `fl` lock dependencies recursively?**  
 A: Yes, via `pip`. The lock file records exact versions of all transitive dependencies.
+
+**Q: Can I import from requirements.txt?**  
+A: Yes! Use `fl add req` to read `requirements.txt` and add all packages to your project. Each package gets added to `pyproject.toml` and installed.
 
 ---
 
