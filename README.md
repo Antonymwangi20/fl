@@ -1,4 +1,4 @@
-# py - Python Project Management Without Friction
+# fl - Python Project Management Without Friction
 
 A single-file Python tool for managing virtual environments, dependencies, and script execution. Designed to feel natural and get out of your way.
 
@@ -10,40 +10,40 @@ A single-file Python tool for managing virtual environments, dependencies, and s
 
 ```bash
 # Initialize a new project
-py init
+fl init
 
 # Add dependencies
-py add requests flask
+fl add requests flask
 
 # Run a script
-py main.py
+fl main.py
 
 # Enter the project environment
-py shell
+fl shell
 
 # List dependencies
-py list
+fl list
 
 # Check project health
-py doctor
+fl doctor
 ```
 
 ---
 
 ## Installation
 
-Copy `py` to your PATH:
+Copy `fl` to your PATH:
 
 ```bash
-curl https://example.com/py -o ~/.local/bin/py
-chmod +x ~/.local/bin/py
+curl -fsSL https://raw.githubusercontent.com/Antonymwangi20/fl/main/fl -o ~/.local/bin/fl
+chmod +x ~/.local/bin/fl
 ```
 
 Or download directly:
 
 ```bash
-wget https://example.com/py -O ~/.local/bin/py
-chmod +x ~/.local/bin/py
+wget https://example.com/fl -O ~/.local/bin/fl
+chmod +x ~/.local/bin/fl
 ```
 
 **Requirements:**
@@ -54,53 +54,53 @@ chmod +x ~/.local/bin/py
 
 ## Core Commands
 
-### `py init`
+### `fl init`
 Initialize a new project with `pyproject.toml`, `.gitignore`, and `.venv` setup.
 
 ```bash
-$ py init
+$ fl init
 ✓ Created pyproject.toml
 ✓ Created .gitignore
 ```
 
-### `py add <package> [package2 ...]`
+### `fl add <package> [package2 ...]`
 Add dependencies and automatically install them.
 
 ```bash
-$ py add requests flask
+$ fl add requests flask
 ✓ Added requests
 ✓ Added flask
 ✓ Virtual environment created
 ✓ Dependencies installed
 ```
 
-### `py run <script.py> [args...]`
-Run a Python script in the project environment. Can be abbreviated to just `py script.py`.
+### `fl run <script.py> [args...]`
+Run a Python script in the project environment. Can be abbreviated to just `fl script.py`.
 
 ```bash
-$ py run main.py --port 8000
+$ fl run main.py --port 8000
 # OR
-$ py main.py --port 8000
+$ fl main.py --port 8000
 ```
 
 **Flags:**
 - `-v, --verbose` - Show which Python interpreter is being used
 
-### `py shell`
+### `fl shell`
 Drop into an interactive shell with the project environment activated.
 
 ```bash
-$ py shell
+$ fl shell
 Entering project environment (.venv)
 Type 'exit' to leave
 (.venv) $ python --version
 ```
 
-### `py list`
+### `fl list`
 Show declared dependencies and installed packages.
 
 ```bash
-$ py list
+$ fl list
 Dependencies:
   • requests
   • flask
@@ -109,29 +109,29 @@ Installed (13 packages)
 Lock records 13 packages
 ```
 
-### `py remove <pkg> [pkg2 ...]`
+### `fl remove <pkg> [pkg2 ...]`
 Remove packages from dependencies and uninstall them.
 
 ```bash
-$ py remove requests
+$ fl remove requests
 ✓ Removed requests from pyproject.toml
 Found existing installation: requests 2.32.5
 Successfully uninstalled requests-2.32.5
 ```
 
-### `py upgrade <pkg> [pkg2 ...]`
+### `fl upgrade <pkg> [pkg2 ...]`
 Upgrade packages to the latest available versions.
 
 ```bash
-$ py upgrade flask
+$ fl upgrade flask
 Requirement already satisfied: flask in ./.venv/lib/python3.13/site-packages (3.1.3)
 ```
 
-### `py purge`
+### `fl purge`
 Completely clear the project environment and dependencies.
 
 ```bash
-$ py purge
+$ fl purge
 ✓ Cleared dependencies in pyproject.toml
 ✓ Removed virtual environment
 ✓ Environment purged
@@ -141,7 +141,7 @@ $ py purge
 
 ## Diagnostic & Analysis Commands
 
-### `py doctor`
+### `fl doctor`
 Run comprehensive diagnostics on the project environment.
 
 Checks:
@@ -154,7 +154,7 @@ Checks:
 - ✅ State file presence
 
 ```bash
-$ py doctor
+$ fl doctor
 Examining project...
 
 ✓ pyproject.toml syntax OK
@@ -168,11 +168,11 @@ Examining project...
 ✓ everything looks healthy
 ```
 
-### `py check`
+### `fl check`
 Check for dependency conflicts and invalid version specifications.
 
 ```bash
-$ py check
+$ fl check
 Analyzing dependencies...
 
 ✓ No dependency conflicts detected
@@ -182,11 +182,11 @@ Analyzing dependencies...
 - Multiple conflicting version specs for the same package
 - Invalid version operators (only `>=`, `<=`, `==`, `!=`, `~=`, `>`, `<` are valid)
 
-### `py audit`
+### `fl audit`
 Check which packages have newer versions available on PyPI.
 
 ```bash
-$ py audit
+$ fl audit
 Checking 13 packages for updates...
 ✓ All packages are up to date
 ```
@@ -198,27 +198,27 @@ Found 2 outdated package(s):
   requests      2.30.0          → 2.32.5
   flask         3.0.0           → 3.1.3
 
-Run 'py upgrade requests' to update a package
+Run 'fl upgrade requests' to update a package
 ```
 
-### `py search <term>`
+### `fl search <term>`
 Search PyPI for packages using the modern JSON API (no `pip search` deprecation).
 
 ```bash
-$ py search flask
+$ fl search flask
 Searching PyPI for 'flask'...
 
 Results:
   flask                         3.1.3           Web development, one drop at a time
 
-To add: py add flask
+To add: fl add flask
 ```
 
-### `py lock-diff`
+### `fl lock-diff`
 Compare lock file with currently installed packages to detect divergences.
 
 ```bash
-$ py lock-diff
+$ fl lock-diff
 Comparing lock file to installed packages...
 
 ✓ Lock file and installed packages match
@@ -236,14 +236,14 @@ Installed but not in lock file (2):
 Version mismatches (1):
   requests     lock: 2.30.0    installed: 2.32.5
 
-Run 'py install --force' to sync to dependencies
+Run 'fl install --force' to sync to dependencies
 ```
 
 ---
 
 ## Project Recovery Commands
 
-### `py fix`
+### `fl fix`
 Auto-fix common project issues.
 
 Auto-repairs:
@@ -253,7 +253,7 @@ Auto-repairs:
 - ✅ Missing lock files
 
 ```bash
-$ py fix
+$ fl fix
 Scanning for issues...
 
 ✓ pyproject.toml syntax OK
@@ -266,20 +266,20 @@ Scanning for issues...
 
 ## Performance & Caching
 
-### `py cache`
-Manage the global wheel cache at `~/.cache/py/`.
+### `fl cache`
+Manage the global wheel cache at `~/.cache/fl/`.
 
 **Show cache info:**
 ```bash
-$ py cache info
-Cache directory: /home/user/.cache/py
+$ fl cache info
+Cache directory: /home/user/.cache/fl
 Wheels cached: 42
 Total size: 156.32 MB
 ```
 
 **Prune old wheels** (older than 30 days):
 ```bash
-$ py cache prune
+$ fl cache prune
 ✓ Pruned 5 old wheels
 ```
 
@@ -289,12 +289,12 @@ $ py cache prune
 
 ## CI & Environment Snapshots
 
-### `py snapshot save [name]`
+### `fl snapshot save [name]`
 Save a snapshot of the current environment (dependencies + installed versions).
 
 ```bash
-$ py snapshot save production
-✓ Snapshot saved: .py-snapshots/production.json
+$ fl snapshot save production
+✓ Snapshot saved: .fl-snapshots/production.json
 ```
 
 **Use cases:**
@@ -302,11 +302,11 @@ $ py snapshot save production
 - Archive known-good environments for CI
 - Document dependency state at release time
 
-### `py snapshot compare [name]`
+### `fl snapshot compare [name]`
 Compare current environment against a saved snapshot.
 
 ```bash
-$ py snapshot compare production
+$ fl snapshot compare production
 Comparing against snapshot 'production'...
 
 Updated (2):
@@ -319,11 +319,11 @@ Updated (2):
 - Packages removed since snapshot
 - Version changes
 
-### `py snapshot list`
-List all saved snapshots in `.py-snapshots/`.
+### `fl snapshot list`
+List all saved snapshots in `.fl-snapshots/`.
 
 ```bash
-$ py snapshot list
+$ fl snapshot list
 Saved snapshots:
   • dev
   • production
@@ -334,26 +334,26 @@ Saved snapshots:
 
 ## Project Structure
 
-After `py init`, your project looks like:
+After `fl init`, your project looks like:
 
 ```
 my-project/
 ├── .venv/                    # Auto-created virtual environment
 ├── pyproject.toml            # Project metadata & dependencies
 ├── .gitignore                # Venv + cache exclusions
-├── .py.state.json            # Internal state tracking
-├── .py.lock.json             # Lock file (like requirements.lock)
-└── .py-snapshots/            # Environment snapshots (optional)
+├── .fl.state.json            # Internal state tracking
+├── .fl.lock.json             # Lock file (like requirements.lock)
+└── .fl-snapshots/            # Environment snapshots (optional)
     ├── latest.json
     ├── production.json
     └── testing.json
 ```
 
-**Files created by py:**
+**Files created by fl:**
 - `.venv/` – Virtual environment (gitignored)
-- `.py.state.json` – Tracks declared dependencies (gitignored)
-- `.py.lock.json` – Lock file with exact versions (gitignored)
-- `.py-snapshots/` – Environment snapshots directory
+- `.fl.state.json` – Tracks declared dependencies (gitignored)
+- `.fl.lock.json` – Lock file with exact versions (gitignored)
+- `.fl-snapshots/` – Environment snapshots directory
 
 ---
 
@@ -379,9 +379,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 ```
 
-**py respects:**
+**fl respects:**
 - `dependencies` – List of packages to install
-- `requires-python` – Validated by `py doctor`
+- `requires-python` – Validated by `fl doctor`
 - `project.name` – Used in initialization
 
 ---
@@ -389,40 +389,40 @@ build-backend = "hatchling.build"
 ## Advanced Usage
 
 ### Global Wheel Cache
-Wheels are automatically cached in `~/.cache/py/`. This speeds up reinstalling common dependencies across projects:
+Wheels are automatically cached in `~/.cache/fl/`. This speeds up reinstalling common dependencies across projects:
 
 ```bash
-$ py add numpy
+$ fl add numpy
 # First time: Downloads and caches wheel
 
-$ cd ../another-project && py add numpy
+$ cd ../another-project && fl add numpy
 # Second time: Instant install from cache
 ```
 
 Check cache usage:
 
 ```bash
-$ py cache info
+$ fl cache info
 Wheels cached: 156
 Total size: 2.34 GB
 
-$ py cache prune  # Remove wheels older than 30 days
+$ fl cache prune  # Remove wheels older than 30 days
 ```
 
 ### Lock Files
 
-py automatically handles lock files:
+fl automatically handles lock files:
 
-1. **On `py add`:** Downloads and records exact versions in `.py.lock.json`
-2. **On `py run`:** Skips reinstall if lock matches declared deps
-3. **On `py audit`:** Compares lock against PyPI for available updates
+1. **On `fl add`:** Downloads and records exact versions in `.fl.lock.json`
+2. **On `fl run`:** Skips reinstall if lock matches declared deps
+3. **On `fl audit`:** Compares lock against PyPI for available updates
 
 Manual lock management:
 
 ```bash
-$ py lock-diff           # See what's out of sync
-$ py snapshot save ci    # Archive current state
-$ py snapshot compare ci # Verify reproducibility
+$ fl lock-diff           # See what's out of sync
+$ fl snapshot save ci    # Archive current state
+$ fl snapshot compare ci # Verify reproducibility
 ```
 
 ### CI/CD Integration
@@ -432,18 +432,18 @@ $ py snapshot compare ci # Verify reproducibility
 ```yaml
 - name: Setup Python project
   run: |
-    pip install .../py
-    py fix  # Auto-create missing files
-    py doctor  # Verify health
-    py snapshot save ci-run
+    pip install .../fl
+    fl fix  # Auto-create missing files
+    fl doctor  # Verify health
+    fl snapshot save ci-run
 
 - name: Run tests
   run: |
-    py pytest tests/
+    fl pytest tests/
 
 - name: Check for regressions
   run: |
-    py snapshot compare ci-run  # Ensure no surprise installs
+    fl snapshot compare ci-run  # Ensure no surprise installs
 ```
 
 ### Dependency Analysis
@@ -451,7 +451,7 @@ $ py snapshot compare ci # Verify reproducibility
 Check for conflicts before committing:
 
 ```bash
-$ py check
+$ fl check
 Analyzing dependencies...
 
 ✓ No dependency conflicts detected
@@ -460,7 +460,7 @@ Analyzing dependencies...
 Audit before deploying:
 
 ```bash
-$ py audit
+$ fl audit
 Checking 42 packages for updates...
 
 Found 3 outdated package(s):
@@ -476,15 +476,15 @@ Skip the `run` verb—just use the script name:
 
 ```bash
 # These are equivalent:
-py main.py
-py run main.py
+fl main.py
+fl run main.py
 ```
 
 ### Verbose Mode
 See which Python interpreter is being used:
 
 ```bash
-$ py run main.py -v
+$ fl run main.py -v
 Using: /path/to/.venv/bin/python
 ```
 
@@ -492,8 +492,8 @@ Using: /path/to/.venv/bin/python
 Each project gets its own `.venv`:
 
 ```bash
-$ cd project-a && py add flask
-$ cd ../project-b && py add flask
+$ cd project-a && fl add flask
+$ cd ../project-b && fl add flask
 # project-b gets its own Flask installation, no conflicts
 ```
 
@@ -501,10 +501,10 @@ $ cd ../project-b && py add flask
 Broken project state is auto-detected:
 
 ```bash
-$ py doctor
+$ fl doctor
 ⚠ .gitignore missing venv or lock file entry
 
-$ py fix
+$ fl fix
 ✓ Fixed .gitignore (added 1 entries)
 ```
 
@@ -517,13 +517,13 @@ $ py fix
 Run doctor to diagnose:
 
 ```bash
-$ py doctor
+$ fl doctor
 ⚠ pkg is not installed
 
-$ py fix
+$ fl fix
 ✓ Recreated lock file
 
-$ py run script.py  # Try again
+$ fl run script.py  # Try again
 ```
 
 ### Virtual environment is broken
@@ -531,9 +531,9 @@ $ py run script.py  # Try again
 Recreate it:
 
 ```bash
-$ py purge
-$ py init
-$ py add ...  # Re-add dependencies
+$ fl purge
+$ fl init
+$ fl add ...  # Re-add dependencies
 ```
 
 ### Lock file is out of sync
@@ -541,17 +541,17 @@ $ py add ...  # Re-add dependencies
 Force reinstall:
 
 ```bash
-$ py lock-diff  # See what's different
-$ py add ...    # Add new package
+$ fl lock-diff  # See what's different
+$ fl add ...    # Add new package
 # (This auto-syncs the lock file)
 ```
 
 ### `pip search` doesn't work
 
-Use `py search` instead (uses PyPI JSON API):
+Use `fl search` instead (uses PyPI JSON API):
 
 ```bash
-$ py search requests
+$ fl search requests
 # Modern, faster, works offline
 ```
 
@@ -561,14 +561,14 @@ $ py search requests
 
 | Operation | Time | Notes |
 |-----------|------|-------|
-| `py init` | 2-5s | Creates venv + basic files |
-| `py add` (first) | 10-60s | Downloads wheels, depends on package size |
-| `py add` (cached) | <1s | Uses global cache, instant |
-| `py run` | <1s | Reuses lock file, no reinstall |
-| `py doctor` | 1-2s | Local checks only (no network) |
-| `py audit` | 5-30s | Checks PyPI for each package |
-| `py search` | 1-3s | One PyPI API call |
-| `py snapshot save` | <1s | Writes JSON file |
+| `fl init` | 2-5s | Creates venv + basic files |
+| `fl add` (first) | 10-60s | Downloads wheels, depends on package size |
+| `fl add` (cached) | <1s | Uses global cache, instant |
+| `fl run` | <1s | Reuses lock file, no reinstall |
+| `fl doctor` | 1-2s | Local checks only (no network) |
+| `fl audit` | 5-30s | Checks PyPI for each package |
+| `fl search` | 1-3s | One PyPI API call |
+| `fl snapshot save` | <1s | Writes JSON file |
 
 ---
 
@@ -587,15 +587,15 @@ $ py search requests
 A: Not exactly. It's simpler and faster for small projects. Good for scripts, prototypes, and CI. Poetry is better for complex multi-package projects.
 
 **Q: Will my `.venv` be portable?**  
-A: No, virtualenvs are platform/Python-specific. Use `py snapshot` + CI for reproducibility.
+A: No, virtualenvs are platform/Python-specific. Use `fl snapshot` + CI for reproducibility.
 
-**Q: Can I use `py` for production?**  
+**Q: Can I use `fl` for production?**  
 A: Yes, with snapshots. Save a snapshot, version it, and compare in CI.
 
 **Q: What about private packages?**  
-A: Use `pip`'s standard authentication. py passes everything to pip.
+A: Use `pip`'s standard authentication. fl passes everything to pip.
 
-**Q: Does `py` lock dependencies recursively?**  
+**Q: Does `fl` lock dependencies recursively?**  
 A: Yes, via `pip`. The lock file records exact versions of all transitive dependencies.
 
 ---

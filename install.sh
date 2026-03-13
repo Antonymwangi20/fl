@@ -1,14 +1,14 @@
 #!/bin/bash
 #
-# py - Python Project Management Tool
+# fl - Python Project Management Tool
 # Installation script
 #
 # Usage:
-#   curl https://raw.githubusercontent.com/Antonymwangi20/py/main/install.sh | bash
+#   curl https://raw.githubusercontent.com/Antonymwangi20/fl/main/install.sh | bash
 #   OR
 #   bash install.sh
 #
-# This script installs py to ~/.local/bin/py and ensures it's in PATH
+# This script installs fl to ~/.local/bin/fl and ensures it's in PATH
 
 set -e
 
@@ -19,9 +19,9 @@ YELLOW='\033[1;33m'
 RESET='\033[0m'
 
 # Configuration
-REPO_URL="${REPO_URL:-https://raw.githubusercontent.com/Antonymwangi20/py/main}"
+REPO_URL="${REPO_URL:-https://raw.githubusercontent.com/Antonymwangi20/fl/main}"
 INSTALL_DIR="$HOME/.local/bin"
-INSTALL_PATH="$INSTALL_DIR/py"
+INSTALL_PATH="$INSTALL_DIR/fl"
 VERSION="1.0"
 
 # Helper functions
@@ -78,30 +78,30 @@ create_install_dir() {
     fi
 }
 
-# Download or use local py script
+# Download or use local fl script
 install_py() {
-    echo "Installing py..."
+    echo "Installing fl..."
     
-    if [[ -f "./py" ]]; then
-        # Use local py script
-        log_info "Using local py script"
-        cp ./py "$INSTALL_PATH"
+    if [[ -f "./fl" ]]; then
+        # Use local fl script
+        log_info "Using local fl script"
+        cp ./fl "$INSTALL_PATH"
     else
         # Download from repository
-        log_info "Downloading py from $REPO_URL/py"
+        log_info "Downloading fl from $REPO_URL/fl"
         
         if command -v curl &> /dev/null; then
-            curl -fsSL "$REPO_URL/py" -o "$INSTALL_PATH" || {
-                log_error "Failed to download py"
+            curl -fsSL "$REPO_URL/fl" -o "$INSTALL_PATH" || {
+                log_error "Failed to download fl"
                 exit 1
             }
         elif command -v wget &> /dev/null; then
-            wget -q "$REPO_URL/py" -O "$INSTALL_PATH" || {
-                log_error "Failed to download py"
+            wget -q "$REPO_URL/fl" -O "$INSTALL_PATH" || {
+                log_error "Failed to download fl"
                 exit 1
             }
         else
-            log_error "curl or wget required to download py"
+            log_error "curl or wget required to download fl"
             exit 1
         fi
     fi
@@ -131,7 +131,7 @@ verify_installation() {
     
     # Test execution
     if ! "$INSTALL_PATH" --version &> /dev/null; then
-        log_error "Installation verification failed: py doesn't work"
+        log_error "Installation verification failed: fl doesn't work"
         exit 1
     fi
     
@@ -182,27 +182,27 @@ show_next_steps() {
     echo ""
     echo "=== Installation Complete ==="
     echo ""
-    log_info "py $VERSION installed to $INSTALL_PATH"
+    log_info "fl $VERSION installed to $INSTALL_PATH"
     echo ""
     echo "Quick start:"
     echo "  mkdir my-project"
     echo "  cd my-project"
-    echo "  py init"
-    echo "  py add requests"
-    echo "  py doctor"
+    echo "  fl init"
+    echo "  fl add requests"
+    echo "  fl doctor"
     echo ""
     echo "For help:"
-    echo "  py --help"
+    echo "  fl --help"
     echo ""
     echo "Documentation:"
-    echo "  https://github.com/Antonymwangi20/py#readme"
+    echo "  https://github.com/Antonymwangi20/fl#readme"
     echo ""
 }
 
 # Main installation flow
 main() {
     echo "╔════════════════════════════════════╗"
-    echo "║  py - Python Project Management    ║"
+    echo "║  fl - Python Project Management    ║"
     echo "║  Installation Script               ║"
     echo "╚════════════════════════════════════╝"
     echo ""
@@ -213,7 +213,7 @@ main() {
     create_install_dir
     echo ""
     
-    install_py
+    install_fl
     echo ""
     
     verify_installation

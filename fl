@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-py - Python project management without the friction.
+fl - Python project management without the friction.
 
 A single-file tool that handles environments, dependencies, and execution
 the way it should work: invisibly.
@@ -31,8 +31,8 @@ except ImportError:
 
 VENV_DIR = ".venv"
 CONFIG_FILE = "pyproject.toml"
-STATE_FILE = ".py.state.json"
-LOCK_FILE = ".py.lock.json"
+STATE_FILE = ".fl.state.json"
+LOCK_FILE = ".fl.lock.json"
 
 class Colors:
     """Terminal colors for output."""
@@ -453,7 +453,7 @@ def format_search_results(results):
 
 
 def get_cache_dir():
-    """Get or create ~/.cache/py directory."""
+    """Get or create ~/.cache/fl directory."""
     cache_dir = os.path.expanduser("~/.cache/py")
     os.makedirs(cache_dir, exist_ok=True)
     return cache_dir
@@ -548,7 +548,7 @@ def auto_fix_gitignore():
         missing = [r for r in required if r not in content]
         if missing:
             with open(".gitignore", 'a') as f:
-                f.write("\n# Added by py auto-fix\n")
+                f.write("\n# Added by fl auto-fix\n")
                 for item in missing:
                     f.write(f"{item}\n")
             print(success(f"Fixed .gitignore (added {len(missing)} entries)"))
@@ -628,7 +628,7 @@ def cmd_fix(args):
         print(f"\n{success(f'Fixed {fixed} issue(s)')}")
 
 
-SNAPSHOT_DIR = ".py-snapshots"
+SNAPSHOT_DIR = ".fl-snapshots"
 
 def get_snapshot_path(name):
     """Get path to named snapshot."""
@@ -638,12 +638,12 @@ def get_snapshot_path(name):
 def cmd_snapshot(args):
     """Manage environment snapshots for CI/reproducibility."""
     if not hasattr(args, 'snapshot_cmd'):
-        print("Usage: py snapshot [save|compare|list]")
+        print("Usage: fl snapshot [save|compare|list]")
         return
     
     if args.snapshot_cmd == 'save':
         if not venv_exists():
-            print(warn("No venv found; run 'py init' first"))
+            print(warn("No venv found; run 'fl init' first"))
             return
         
         pip = get_venv_pip()
@@ -757,7 +757,7 @@ build-backend = "hatchling.build"
 
 def cmd_add(args):
     if not args.packages:
-        print("Usage: py add <package> [package2 ...]")
+        print("Usage: fl add <package> [package2 ...]")
         return
 
     if not os.path.exists(CONFIG_FILE):
@@ -777,7 +777,7 @@ def cmd_add(args):
 
 def cmd_run(args):
     if not args.script:
-        print("Usage: py run <script.py> [args...]")
+        print("Usage: fl run <script.py> [args...]")
         return
 
     if not Path(args.script).exists():
@@ -994,7 +994,7 @@ def cmd_doctor(args):
 def cmd_remove(args):
     """Remove one or more packages from project and environment."""
     if not args.packages:
-        print("Usage: py remove <pkg> [pkg2 ...]")
+        print("Usage: fl remove <pkg> [pkg2 ...]")
         return
     removed_any = False
     for pkg in args.packages:
@@ -1015,7 +1015,7 @@ def cmd_remove(args):
 def cmd_upgrade(args):
     """Upgrade packages in the environment; adds to pyproject if missing."""
     if not args.packages:
-        print("Usage: py upgrade <pkg> [pkg2 ...]")
+        print("Usage: fl upgrade <pkg> [pkg2 ...]")
         return
     if not venv_exists() and not create_venv():
         return
@@ -1050,7 +1050,7 @@ def cmd_purge(args):
 def cmd_audit(args):
     """Audit dependencies for outdated packages."""
     if not venv_exists():
-        print(warn("virtual environment not found; run 'py init' first"))
+        print(warn("virtual environment not found; run 'fl init' first"))
         return
     
     pip = get_venv_pip()
@@ -1067,7 +1067,7 @@ def cmd_audit(args):
         print(warn(f"Found {len(outdated)} outdated package(s):\n"))
         for pkg, current, latest in outdated:
             print(f"  {pkg:<25} {current:<15} → {latest}")
-        print(f"\nRun 'py upgrade {outdated[0][0]}' to update a package")
+        print(f"\nRun 'fl upgrade {outdated[0][0]}' to update a package")
     else:
         print(success("All packages are up to date"))
 
@@ -1120,20 +1120,20 @@ def cmd_lock_diff(args):
     if not has_diff:
         print(success("Lock file and installed packages match"))
     else:
-        print("Run 'py install --force' to sync to dependencies")
+        print("Run 'fl install --force' to sync to dependencies")
 
 
 def cmd_search(args):
     """Search PyPI for a package name using the JSON API."""
     if not args.query:
-        print("Usage: py search <term>")
+        print("Usage: fl search <term>")
         return
     print(f"Searching PyPI for '{args.query}'...")
     results = search_pypi(args.query)
     if results:
         print(format_search_results(results))
         for pkg_name, version, summary in results:
-            print(f"\nTo add: py add {pkg_name}")
+            print(f"\nTo add: fl add {pkg_name}")
     else:
         print(warn(f"No packages found matching '{args.query}'"))
 
@@ -1163,22 +1163,22 @@ def main():
             return
 
     parser = argparse.ArgumentParser(
-        description='py - Python project management without the friction',
-        prog='py',
+        description='fl - Python project management without the friction',
+        prog='fl',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 examples:
-  py init                 # Initialize new project
-  py add requests flask   # Add dependencies
-  py main.py              # Run script (auto-detected)
-  py run main.py -v       # Run with verbose output
-  py shell                # Enter project environment
-  py list                 # Show dependencies
-  py doctor               # Diagnose environment
-  py remove pkg           # Remove dependency
-  py upgrade pkg          # Upgrade a package
-  py purge                # Cleans environment
-  py search requests      # Search PyPI
+  fl init                 # Initialize new project
+  fl add requests flask   # Add dependencies
+  fl main.py              # Run script (auto-detected)
+  fl run main.py -v       # Run with verbose output
+  fl shell                # Enter project environment
+  fl list                 # Show dependencies
+  fl doctor               # Diagnose environment
+  fl remove pkg           # Remove dependency
+  fl upgrade pkg          # Upgrade a package
+  fl purge                # Cleans environment
+  fl search requests      # Search PyPI
         """
     )
 

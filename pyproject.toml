@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 # Project metadata
-name = "py-tool"
+name = "fl-tool"
 version = "1.0.0"
 description = "Python project management without the friction"
 readme = "README.md"
@@ -33,13 +33,13 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Antonymwangi20/py"
-Documentation = "https://github.com/Antonymwangi20/py#readme"
-Source = "https://github.com/Antonymwangi20/py"
-Tracker = "https://github.com/Antonymwangi20/py/issues"
+Homepage = "https://github.com/Antonymwangi20/fl"
+Documentation = "https://github.com/Antonymwangi20/fl#readme"
+Source = "https://github.com/Antonymwangi20/fl"
+Tracker = "https://github.com/Antonymwangi20/fl/issues"
 
 [project.scripts]
-py = "py:main"
+fl = "fl:main"
 
 [tool.setuptools]
-py-modules = ["py"]
+py-modules = ["fl"]
